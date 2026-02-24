@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import MobileMenu from "./MobileMenu";
 
 const services = [
@@ -45,7 +46,14 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-3">
+              <Image
+                src="/logo.png"
+                alt="3D Labs OKC"
+                width={40}
+                height={40}
+                className="w-10 h-10"
+              />
               <span className="text-2xl font-serif font-normal text-primary-dark">
                 3D Labs <span className="text-accent">OKC</span>
               </span>

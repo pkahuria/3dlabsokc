@@ -14,6 +14,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "3D Printing",
     description:
       "A custom-designed camera mount for a commercial drone, printed in PETG for durability and heat resistance.",
+    imageUrl: "/portfolio/custom-drone-mount.jpg",
     specs: ["Material: PETG", "Turnaround: 3 days", "Post-processing: Sanding"],
   },
   {
@@ -22,6 +23,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "3D Scanning",
     description:
       "Scanned and reproduced a discontinued interior trim piece for a classic car restoration project.",
+    imageUrl: "/portfolio/vintage-car-part.jpg",
     specs: [
       "Original: Scanned",
       "Material: ABS",
@@ -34,6 +36,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "3D Modeling",
     description:
       "Full CAD design and prototype production for a new consumer electronics enclosure.",
+    imageUrl: "/portfolio/product-prototype.jpg",
     specs: [
       "Design: From scratch",
       "Iterations: 3 versions",
@@ -46,6 +49,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "3D Printing",
     description:
       "Detailed scale model of a commercial building for a developer presentation.",
+    imageUrl: "/portfolio/architectural-model.jpg",
     specs: [
       "Scale: 1:100",
       "Material: PLA",
@@ -58,6 +62,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "3D Printing",
     description:
       "Multi-part mechanical prototype with moving components for fit and function testing.",
+    imageUrl: "/portfolio/mechanical-assembly.jpg",
     specs: [
       "Parts: 12 components",
       "Material: PETG + TPU",
@@ -70,6 +75,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "3D Scanning",
     description:
       "High-resolution scan of a clay sculpture for digital archiving and reproduction.",
+    imageUrl: "/portfolio/art-sculpture.jpg",
     specs: [
       "Resolution: 0.1mm",
       "Output: STL + OBJ",
@@ -82,6 +88,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "3D Modeling",
     description:
       "Designed a custom enclosure for a Raspberry Pi-based project with ventilation and mounting points.",
+    imageUrl: "/portfolio/custom-enclosure.jpg",
     specs: [
       "Fit: Raspberry Pi 4",
       "Features: Vents + mounts",
@@ -94,6 +101,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "3D Printing",
     description:
       "Reverse-engineered and printed a replacement gear for legacy manufacturing equipment.",
+    imageUrl: "/portfolio/replacement-gear.jpg",
     specs: [
       "Material: Nylon",
       "Tolerance: +/- 0.1mm",
@@ -106,6 +114,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "Training",
     description:
       "Full-day hands-on training session for a manufacturing team on 3D printing fundamentals.",
+    imageUrl: "/portfolio/training-workshop.jpg",
     specs: [
       "Duration: 8 hours",
       "Participants: 6",
