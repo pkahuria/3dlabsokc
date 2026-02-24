@@ -96,16 +96,18 @@ export default function Header() {
 
                   {/* Services Dropdown */}
                   {link.hasDropdown && isServicesOpen && (
-                    <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-border py-2 transform opacity-100 scale-100 transition-all duration-200">
-                      {services.map((service) => (
-                        <Link
-                          key={service.name}
-                          href={service.href}
-                          className="block px-4 py-2 text-sm text-text-primary hover:bg-surface hover:text-accent transition-colors"
-                        >
-                          {service.name}
-                        </Link>
-                      ))}
+                    <div className="absolute top-full left-0 pt-2 w-48">
+                      <div className="bg-white rounded-lg shadow-lg border border-border py-2">
+                        {services.map((service) => (
+                          <Link
+                            key={service.name}
+                            href={service.href}
+                            className="block px-4 py-2 text-sm text-text-primary hover:bg-surface hover:text-accent transition-colors"
+                          >
+                            {service.name}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
