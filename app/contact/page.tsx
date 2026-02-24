@@ -13,7 +13,7 @@ export default function ContactPage() {
     <>
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-primary-dark relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-dark via-primary-dark to-slate-800" />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-sky-900" />
         <div
           className="absolute inset-0 opacity-10"
           style={{
