@@ -7,6 +7,7 @@ Upload the following images to their respective folders.
 | Filename | Size | Description |
 |----------|------|-------------|
 | `logo.png` | 200x200px | Company logo (square, transparent background) |
+| `hero-image.jpg` | 800x800px | Homepage hero image (3D printer, printed parts, or workspace) |
 | `og-image.jpg` | 1200x630px | Social media sharing image |
 
 ## Portfolio Images (`public/portfolio/`)
