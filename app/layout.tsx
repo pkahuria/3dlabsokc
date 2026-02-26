@@ -1,39 +1,31 @@
 import type { Metadata } from "next";
-import { DM_Serif_Display, Inter, JetBrains_Mono } from "next/font/google";
+import { DM_Serif_Display, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
+import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import JsonLd from "@/components/JsonLd";
-import Analytics from "@/components/Analytics";
 
 const dmSerifDisplay = DM_Serif_Display({
   weight: "400",
+  style: ["normal", "italic"],
   variable: "--font-dm-serif",
   subsets: ["latin"],
   display: "swap",
 });
 
-const inter = Inter({
-  weight: ["400", "500", "600"],
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  weight: "400",
-  variable: "--font-jetbrains",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-plus-jakarta",
   subsets: ["latin"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "3D Printing Services OKC | 3D Labs OKC",
-    template: "%s | 3D Labs OKC",
+    default: "3D Labs OKC — 3D Printing, Scanning & Design Services",
+    template: "%s — 3D Labs OKC",
   },
   description:
-    "Professional 3D printing, scanning, and design services in Oklahoma City. Fast turnaround, competitive pricing. Request a free quote today.",
+    "From a rough sketch to a finished product — 3D Labs OKC delivers fast, precise FDM printing, scanning, and design services for businesses and individuals across Oklahoma.",
   keywords: [
     "3D printing OKC",
     "3D printing Oklahoma City",
@@ -42,11 +34,12 @@ export const metadata: Metadata = {
     "3D modeling services",
     "custom 3D printed parts",
     "3D printing near me",
-    "prototype manufacturing Oklahoma",
+    "FDM printing OKC",
+    "reverse engineering Oklahoma City",
   ],
-  authors: [{ name: "3D Labs OKC LLC" }],
-  creator: "3D Labs OKC LLC",
-  publisher: "3D Labs OKC LLC",
+  authors: [{ name: "3D Labs OKC, LLC" }],
+  creator: "3D Labs OKC, LLC",
+  publisher: "3D Labs OKC, LLC",
   metadataBase: new URL("https://3dlabsokc.com"),
   alternates: {
     canonical: "/",
@@ -56,9 +49,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://3dlabsokc.com",
     siteName: "3D Labs OKC",
-    title: "3D Printing Services OKC | 3D Labs OKC",
+    title: "3D Labs OKC — 3D Printing, Scanning & Design Services",
     description:
-      "Professional 3D printing, scanning, and design services in Oklahoma City. Fast turnaround, competitive pricing.",
+      "From a rough sketch to a finished product — 3D Labs OKC delivers fast, precise FDM printing, scanning, and design services for businesses and individuals across Oklahoma.",
     images: [
       {
         url: "/og-image.jpg",
@@ -70,9 +63,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "3D Printing Services OKC | 3D Labs OKC",
+    title: "3D Labs OKC — 3D Printing, Scanning & Design Services",
     description:
-      "Professional 3D printing, scanning, and design services in Oklahoma City.",
+      "Fast, precise FDM printing, scanning, and design services for businesses and individuals across Oklahoma.",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -86,10 +79,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    // Add these after setting up Google Search Console
-    // google: "your-google-verification-code",
-  },
 };
 
 export default function RootLayout({
@@ -99,15 +88,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <JsonLd />
-      </head>
       <body
-        className={`${dmSerifDisplay.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${dmSerifDisplay.variable} ${plusJakartaSans.variable} antialiased`}
       >
-        <Analytics />
-        <Header />
-        <main className="page-transition">{children}</main>
+        <Nav />
+        <main id="main-content">{children}</main>
         <Footer />
       </body>
     </html>

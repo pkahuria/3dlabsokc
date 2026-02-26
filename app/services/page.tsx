@@ -1,237 +1,195 @@
 import { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import SectionHeading from "@/components/ui/SectionHeading";
-import CTABanner from "@/components/ui/CTABanner";
-import FAQAccordion from "@/components/ui/FAQAccordion";
-import { generateFAQSchema } from "@/lib/faq-schema";
+import PageHero from "@/components/PageHero";
+import StickyServiceNav from "@/components/services/StickyServiceNav";
+import ServiceSection from "@/components/services/ServiceSection";
+import UseCasesSection from "@/components/services/UseCasesSection";
+import MaterialsSection from "@/components/services/MaterialsSection";
+import CTASection from "@/components/CTASection";
 
 export const metadata: Metadata = {
-  title: "3D Printing & Prototyping Services",
+  title: "Services — 3D Labs OKC | 3D Printing, Scanning & Design",
   description:
-    "End-to-end 3D services including printing, scanning, modeling, and training in Oklahoma City. From prototype to production.",
+    "End-to-end 3D services including printing, scanning, modeling, and reverse engineering in Oklahoma City. From concept to finished part.",
+  openGraph: {
+    title: "Services — 3D Labs OKC | 3D Printing, Scanning & Design",
+    description:
+      "End-to-end 3D services including printing, scanning, modeling, and reverse engineering in Oklahoma City. From concept to finished part.",
+  },
 };
 
-const services = [
-  {
-    title: "3D Printing",
-    description:
-      "Professional FDM 3D printing for prototypes, custom parts, and production runs. We use industrial-grade printers and a wide range of materials to deliver high-quality results for any project.",
-    href: "/services/3d-printing",
-    features: [
-      "Industrial FDM printers",
-      "Multiple material options",
-      "Fast turnaround times",
-      "Competitive pricing",
-    ],
-  },
-  {
-    title: "3D Scanning",
-    description:
-      "Capture complex objects in high-resolution digital 3D models. Perfect for reverse engineering, quality inspection, archiving, and creating digital twins of physical objects.",
-    href: "/services/3d-scanning",
-    features: [
-      "High-resolution capture",
-      "Reverse engineering",
-      "Quality inspection",
-      "Digital archiving",
-    ],
-  },
-  {
-    title: "3D Modeling",
-    description:
-      "Custom CAD design and 3D modeling services to turn your ideas into print-ready files. Whether you have a sketch, photo, or just an idea, we can create the 3D model you need.",
-    href: "/services/3d-modeling",
-    features: [
-      "Custom CAD design",
-      "Print optimization",
-      "File repair & conversion",
-      "Concept visualization",
-    ],
-  },
-  {
-    title: "Training",
-    description:
-      "Hands-on 3D printing training sessions for individuals and businesses. Learn to operate 3D printers, prepare files, troubleshoot issues, and build in-house capabilities.",
-    href: "/services/training",
-    features: [
-      "Hands-on learning",
-      "Custom curriculum",
-      "Equipment training",
-      "Ongoing support",
-    ],
-  },
-];
-
-const faqs = [
-  {
-    question: "What materials can you print with?",
-    answer:
-      "We offer a wide range of FDM materials including PLA, PETG, ABS, TPU (flexible), ASA, Nylon, and specialty materials like carbon fiber composites. The best material depends on your project requirements for strength, flexibility, heat resistance, and appearance.",
-  },
-  {
-    question: "How long does a typical project take?",
-    answer:
-      "Turnaround time depends on project complexity, size, and current queue. Simple prints can be completed in 24-48 hours, while larger or more complex projects may take a week or more. We always provide an estimated timeline with your quote.",
-  },
-  {
-    question: "Do you offer rush services?",
-    answer:
-      "Yes! We understand that sometimes you need parts fast. Rush services are available for an additional fee. Contact us to discuss your urgent timeline needs.",
-  },
-  {
-    question: "Can you work from my existing 3D files?",
-    answer:
-      "Absolutely. We accept most common 3D file formats including STL, OBJ, STEP, and 3MF. We'll review your file for printability and let you know if any modifications are needed.",
-  },
-];
-
 export default function ServicesPage() {
-  const faqSchema = generateFAQSchema(faqs);
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      <PageHero
+        label="Our Services"
+        title="Everything you need, from"
+        titleHighlight="concept"
+        titleEnd="to finished part."
+        description="We handle every step of the 3D workflow — modeling, printing, scanning, and reverse engineering. One team, one location, no handoffs between vendors."
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Services", href: "/services" },
+        ]}
       />
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-primary-dark relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-700 via-slate-600 to-sky-700" />
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `radial-gradient(circle, #0EA5E9 1px, transparent 1px)`,
-            backgroundSize: "24px 24px",
-          }}
-        />
+      <StickyServiceNav />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-white mb-6">
-            End-to-End <span className="text-accent">3D Services</span>
-          </h1>
-          <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto">
-            From initial concept to finished product, we provide comprehensive
-            3D printing, scanning, modeling, and training services to bring your
-            ideas to life.
-          </p>
-        </div>
-      </section>
+      {/* 3D Printing Section */}
+      <ServiceSection
+        id="3d-printing"
+        label="Core Service"
+        title="3D Printing"
+        description="Our on-demand FDM print farm turns your designs into physical parts — fast. Whether it's a single prototype or a batch of 500, we match the right material, settings, and post-processing to deliver parts that actually perform in the real world."
+        specBadges={["PLA", "PETG", "ABS", "TPU", "ASA", "Nylon"]}
+        features={[
+          {
+            title: "No minimum orders.",
+            description: "One part or a thousand — same attention to detail.",
+          },
+          {
+            title: "Material-matched.",
+            description:
+              "We choose the filament based on your part's real-world requirements — not whatever's cheapest.",
+          },
+          {
+            title: "Most orders in 48 hours.",
+            description:
+              "Our multi-printer farm runs around the clock when demand calls for it.",
+          },
+          {
+            title: "Accepts STL, OBJ, STEP.",
+            description:
+              "Not sure about file formats? We'll help you sort it out.",
+          },
+        ]}
+        imageSrc="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=700&h=800&fit=crop&crop=center"
+        imageAlt="Technician operating 3D printers"
+        detailIcon="🏭"
+        detailTitle="Multi-Printer FDM Farm"
+        detailDescription="Running multiple printers for fast batch output"
+        ctaText="Get a Print Quote"
+        secondaryCta={{ text: "View Materials", href: "#materials" }}
+      />
 
-      {/* Services List */}
-      <section className="py-24 bg-primary-light">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-24">
-            {services.map((service, index) => (
-              <div
-                key={service.title}
-                className={`grid lg:grid-cols-2 gap-12 items-center ${
-                  index % 2 === 1 ? "lg:flex-row-reverse" : ""
-                }`}
-              >
-                {/* Image */}
-                <div
-                  className={`${index % 2 === 1 ? "lg:order-2" : "lg:order-1"}`}
-                >
-                  <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 border border-border flex items-center justify-center overflow-hidden">
-                    <div className="text-center text-slate-400 p-8">
-                      <svg
-                        className="w-20 h-20 mx-auto mb-4 opacity-50"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1}
-                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        />
-                      </svg>
-                      <p className="text-sm">{service.title} Image</p>
-                    </div>
-                  </div>
-                </div>
+      {/* 3D Modeling Section */}
+      <ServiceSection
+        id="3d-modeling"
+        label="Design Service"
+        title="3D Modeling"
+        description="Don't have a 3D file? No problem. Our in-house team builds precise digital models from your sketches, drawings, photos, or even just a verbal description. Every model is optimized for FDM printing so there are no surprises when it's time to print."
+        features={[
+          {
+            title: "From sketch to CAD.",
+            description:
+              "Hand-drawn napkin sketch? Photo of a broken part? We work with whatever you've got.",
+          },
+          {
+            title: "Print-ready output.",
+            description:
+              "Models are designed with proper wall thickness, tolerances, and supports in mind.",
+          },
+          {
+            title: "Iterate fast.",
+            description:
+              "See a 3D preview before we print. Request changes — we refine until it's right.",
+          },
+          {
+            title: "Your file, your IP.",
+            description:
+              "You own the final 3D model. Use it for printing, manufacturing, or further development.",
+          },
+        ]}
+        imageSrc="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=700&h=800&fit=crop&crop=center"
+        imageAlt="Engineer working on 3D design"
+        detailIcon="📐"
+        detailTitle="Precision CAD Modeling"
+        detailDescription="Optimized for real-world FDM printing"
+        ctaText="Start a Design Project"
+        reversed
+      />
 
-                {/* Content */}
-                <div
-                  className={`${index % 2 === 1 ? "lg:order-1" : "lg:order-2"}`}
-                >
-                  <h2 className="text-3xl font-serif text-text-primary mb-4">
-                    {service.title}
-                  </h2>
-                  <p className="text-lg text-text-secondary mb-6 leading-relaxed">
-                    {service.description}
-                  </p>
+      {/* 3D Scanning Section */}
+      <ServiceSection
+        id="3d-scanning"
+        label="Capture Service"
+        title="3D Scanning"
+        description="Need a digital twin of a physical object? Our 3D scanning captures real-world geometry with high precision — creating editable 3D models for reproduction, modification, quality inspection, or archival documentation."
+        features={[
+          {
+            title: "High-fidelity capture.",
+            description:
+              "Precise dimensional accuracy for engineering and manufacturing applications.",
+          },
+          {
+            title: "Editable output.",
+            description:
+              "We deliver clean, usable mesh files — not just a point cloud you can't work with.",
+          },
+          {
+            title: "Scan-to-print pipeline.",
+            description:
+              "We can scan an object and print a reproduction in one seamless workflow.",
+          },
+          {
+            title: "On-site available.",
+            description:
+              "For objects that can't come to us, we can bring the scanner to you.",
+          },
+        ]}
+        imageSrc="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=700&h=800&fit=crop&crop=center"
+        imageAlt="Person performing quality inspection on components"
+        detailIcon="📷"
+        detailTitle="High-Precision 3D Scanning"
+        detailDescription="From physical object to editable digital model"
+        ctaText="Request a Scan"
+      />
 
-                  <ul className="space-y-3 mb-8">
-                    {service.features.map((feature) => (
-                      <li
-                        key={feature}
-                        className="flex items-center gap-3 text-text-primary"
-                      >
-                        <svg
-                          className="w-5 h-5 text-accent flex-shrink-0"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+      {/* Reverse Engineering Section */}
+      <ServiceSection
+        id="reverse-engineering"
+        label="Specialty Service"
+        title="Reverse Engineering"
+        description="When a part is discontinued, out of stock, or simply impossible to source — we reverse-engineer it. We scan the original (even if it's broken), rebuild it in CAD with improvements, and print a drop-in replacement that works as well or better than the original."
+        features={[
+          {
+            title: "Works from broken originals.",
+            description: "We can reconstruct from partial or damaged parts.",
+          },
+          {
+            title: "Improved, not just copied.",
+            description:
+              "We can strengthen weak points, improve fit, and upgrade materials during the rebuild.",
+          },
+          {
+            title: "Full documentation.",
+            description:
+              "You receive the 3D file so you can reorder anytime without starting over.",
+          },
+          {
+            title: "End-to-end.",
+            description:
+              "Scan → Model → Print → Deliver. One team handles everything.",
+          },
+        ]}
+        imageSrc="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=700&h=800&fit=crop&crop=center"
+        imageAlt="Team discussing a reverse engineering project"
+        detailIcon="🔧"
+        detailTitle="Full Reverse Engineering"
+        detailDescription="Scan, redesign, and reproduce discontinued parts"
+        ctaText="Get a Replacement Part"
+        reversed
+      />
 
-                  <Link
-                    href={service.href}
-                    className="inline-flex items-center gap-2 text-accent font-medium hover:gap-3 transition-all"
-                  >
-                    Learn more about {service.title}
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <UseCasesSection />
+      <MaterialsSection />
 
-      {/* FAQ Section */}
-      <section className="py-24 bg-surface">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            label="Common Questions"
-            heading="Frequently Asked Questions"
-            subtext="Have questions about our services? Find answers to the most common questions below."
-          />
-          <FAQAccordion items={faqs} />
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <CTABanner
-        heading="Ready to start your project?"
-        subtext="Get a free quote for your 3D printing, scanning, or design project. We respond within 24 hours."
-        primaryCTA={{ text: "Request a Quote", href: "/quote" }}
+      <CTASection
+        headline="Not sure which service you need?"
+        description="That's what consultations are for. Tell us what you're trying to solve and we'll recommend the right approach — no charge, no pressure."
+        primaryButtonText="Request a Free Quote"
+        primaryButtonHref="/contact#quote"
+        secondaryButtonText="Call (405) 546-2228"
+        secondaryButtonHref="tel:4055462228"
       />
     </>
   );

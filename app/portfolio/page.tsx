@@ -2,13 +2,13 @@ import { Metadata } from "next";
 import PortfolioPageClient from "@/components/PortfolioPageClient";
 
 export const metadata: Metadata = {
-  title: "Our Work | 3D Printing Projects",
+  title: "Our Work — 3D Labs OKC | Portfolio & Case Studies",
   description:
-    "Browse our portfolio of completed 3D printing, scanning, and modeling projects in Oklahoma City.",
+    "Real parts, real results. Browse our portfolio of completed 3D printing, scanning, and reverse engineering projects in Oklahoma City.",
   openGraph: {
-    title: "Our Work | 3D Printing Projects | 3D Labs OKC",
+    title: "Our Work — 3D Labs OKC | Portfolio & Case Studies",
     description:
-      "Browse our portfolio of completed 3D printing, scanning, and modeling projects in Oklahoma City.",
+      "Real parts, real results. Browse our portfolio of completed 3D printing, scanning, and reverse engineering projects in Oklahoma City.",
   },
 };
 

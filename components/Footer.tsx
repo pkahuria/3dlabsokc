@@ -1,216 +1,132 @@
 import Link from "next/link";
 
-const services = [
-  { name: "3D Printing", href: "/services/3d-printing" },
-  { name: "3D Scanning", href: "/services/3d-scanning" },
-  { name: "3D Modeling", href: "/services/3d-modeling" },
-  { name: "Training", href: "/services/training" },
+const servicesLinks = [
+  { href: "/services/3d-printing", label: "3D Printing" },
+  { href: "/services/3d-modeling", label: "3D Modeling" },
+  { href: "/services/3d-scanning", label: "3D Scanning" },
+  { href: "/services/reverse-engineering", label: "Reverse Engineering" },
 ];
 
-const company = [
-  { name: "About Us", href: "/about" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
-  { name: "FAQ", href: "/faq" },
+const companyLinks = [
+  { href: "/about", label: "About Us" },
+  { href: "/portfolio", label: "Our Work" },
+  { href: "/contact", label: "Contact" },
+];
+
+const quickLinks = [
+  { href: "/contact#quote", label: "Request a Quote" },
+  {
+    href: "https://instagram.com/3dlabsokc",
+    label: "Instagram",
+    external: true,
+  },
+  {
+    href: "https://linkedin.com/company/3dlabsokc",
+    label: "LinkedIn",
+    external: true,
+  },
 ];
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="bg-primary-dark text-white">
-      {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+    <footer className="bg-[#020617] text-[#94a3b8] pt-24 pb-6">
+      <div className="section-container">
+        {/* Gradient Accent Line */}
+        <div className="h-[3px] bg-gradient-to-r from-[#f97316] to-[#0c8ce9] rounded-sm mb-24" />
+
+        {/* Footer Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-16 mb-16">
           {/* Brand Column */}
-          <div className="lg:col-span-1">
-            <Link href="/" className="inline-block">
-              <span className="text-2xl font-serif">
-                3D Labs <span className="text-accent">OKC</span>
-              </span>
+          <div>
+            <Link href="/" className="inline-flex items-center gap-3 mb-4">
+              <div className="w-[38px] h-[38px] bg-[#0f172a] rounded-[10px] flex items-center justify-center text-white font-serif text-lg border border-slate-700">
+                3D
+              </div>
+              <div className="font-sans font-bold text-[1.05rem] text-white tracking-[-0.02em]">
+                3D Labs <span className="text-[#0c8ce9]">OKC</span>
+              </div>
             </Link>
-            <p className="mt-4 text-slate-400 text-sm leading-relaxed">
-              Professional 3D printing, scanning, and design services in
-              Oklahoma City. Bringing your ideas to life with precision and
-              expertise.
+            <p className="text-[0.9rem] leading-[1.7] mb-6 max-w-[300px]">
+              Oklahoma City&apos;s trusted partner for 3D printing, scanning, and
+              design. Turning ideas into real parts since day one.
             </p>
-            {/* Social Links */}
-            <div className="flex gap-4 mt-6">
-              <a
-                href="https://facebook.com/3dlabsokc"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-accent transition-colors"
-                aria-label="Facebook"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                </svg>
-              </a>
-              <a
-                href="https://linkedin.com/company/3dlabsokc"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-accent transition-colors"
-                aria-label="LinkedIn"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-              </a>
-              <a
-                href="https://instagram.com/3dlabsokc"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-accent transition-colors"
-                aria-label="Instagram"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                </svg>
-              </a>
-            </div>
+            <a
+              href="tel:4055462228"
+              className="flex items-center gap-2 text-[0.88rem] mb-2 hover:text-[#fb923c] transition-colors"
+            >
+              📞 (405) 546-2228
+            </a>
+            <a
+              href="mailto:Connect@3dlabsokc.com"
+              className="flex items-center gap-2 text-[0.88rem] mb-2 hover:text-[#fb923c] transition-colors"
+            >
+              ✉️ Connect@3dlabsokc.com
+            </a>
+            <a
+              href="https://goo.gl/maps/4goZwH8NeJneP4VNA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-[0.88rem] hover:text-[#fb923c] transition-colors"
+            >
+              📍 10802 Quail Plaza Dr, STE 120A, OKC 73120
+            </a>
           </div>
 
           {/* Services Column */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-300 mb-4">
+            <h4 className="text-white font-sans font-semibold text-[0.85rem] tracking-[0.1em] uppercase mb-6">
               Services
-            </h3>
-            <ul className="space-y-3">
-              {services.map((service) => (
-                <li key={service.name}>
-                  <Link
-                    href={service.href}
-                    className="text-slate-400 hover:text-accent transition-colors text-sm"
-                  >
-                    {service.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            </h4>
+            {servicesLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="block text-[0.9rem] py-[0.3rem] hover:text-white transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
           {/* Company Column */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-300 mb-4">
+            <h4 className="text-white font-sans font-semibold text-[0.85rem] tracking-[0.1em] uppercase mb-6">
               Company
-            </h3>
-            <ul className="space-y-3">
-              {company.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-slate-400 hover:text-accent transition-colors text-sm"
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            </h4>
+            {companyLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="block text-[0.9rem] py-[0.3rem] hover:text-white transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
-          {/* Contact Column */}
+          {/* Quick Links Column */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-300 mb-4">
-              Contact
-            </h3>
-            <ul className="space-y-3 text-sm text-slate-400">
-              <li className="flex items-start gap-3">
-                <svg
-                  className="w-5 h-5 text-accent mt-0.5 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-                <span>
-                  10802 Quail Plaza Dr STE 120
-                  <br />
-                  Oklahoma City, OK 73120
-                </span>
-              </li>
-              <li className="flex items-center gap-3">
-                <svg
-                  className="w-5 h-5 text-accent flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                  />
-                </svg>
-                <a
-                  href="tel:+14055462228"
-                  className="hover:text-accent transition-colors"
-                >
-                  (405) 546-2228
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <svg
-                  className="w-5 h-5 text-accent flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-                <a
-                  href="mailto:connect@3dlabsokc.com"
-                  className="hover:text-accent transition-colors"
-                >
-                  connect@3dlabsokc.com
-                </a>
-              </li>
-            </ul>
+            <h4 className="text-white font-sans font-semibold text-[0.85rem] tracking-[0.1em] uppercase mb-6">
+              Quick Links
+            </h4>
+            {quickLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
+                className="block text-[0.9rem] py-[0.3rem] hover:text-white transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
-      </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-slate-500 text-sm">
-              {currentYear} 3D Labs OKC LLC. All rights reserved.
-            </p>
-            <div className="flex gap-6">
-              <Link
-                href="/privacy"
-                className="text-slate-500 hover:text-accent text-sm transition-colors"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="/terms"
-                className="text-slate-500 hover:text-accent text-sm transition-colors"
-              >
-                Terms of Service
-              </Link>
-            </div>
-          </div>
+        {/* Bottom Bar */}
+        <div className="border-t border-white/[0.06] pt-6 flex flex-col sm:flex-row justify-between items-center gap-2 text-[0.82rem]">
+          <span>© 2026 3D Labs OKC, LLC. All rights reserved.</span>
+          <span>Oklahoma City, Oklahoma</span>
         </div>
       </div>
     </footer>

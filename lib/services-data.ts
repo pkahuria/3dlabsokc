@@ -311,6 +311,98 @@ export const servicesData: Record<string, ServiceData> = {
     ],
   },
 
+  "reverse-engineering": {
+    slug: "reverse-engineering",
+    title: "Reverse Engineering Services",
+    shortTitle: "Reverse Engineering",
+    metaTitle: "Reverse Engineering Services OKC | 3D Labs OKC",
+    metaDescription:
+      "Reverse engineering services in Oklahoma City. We scan, model, and reproduce discontinued or hard-to-source parts with improvements.",
+    heroDescription:
+      "When a part is discontinued, out of stock, or impossible to source — we reverse-engineer it. Scan, redesign, and print drop-in replacements.",
+    whatItIs:
+      "Reverse engineering is the process of analyzing an existing physical part to understand its design, then recreating it digitally for reproduction or improvement. We can work from complete parts, broken originals, or even partial fragments to create accurate replacement parts.",
+    howItWorks:
+      "We start by 3D scanning your original part (even if damaged). Our team then rebuilds it in CAD, often strengthening weak points or improving the design. Finally, we print the replacement using the optimal material for your application. You get both the physical part and the 3D file for future reorders.",
+    applications: [
+      {
+        title: "Discontinued Parts",
+        description:
+          "Reproduce parts that are no longer available from manufacturers or suppliers.",
+      },
+      {
+        title: "Legacy Equipment",
+        description:
+          "Keep older machinery running with reproduced components when OEM parts aren't available.",
+      },
+      {
+        title: "Improved Replacements",
+        description:
+          "Strengthen weak points, upgrade materials, or improve fit during the rebuild process.",
+      },
+      {
+        title: "Documentation",
+        description:
+          "Create digital records of critical parts for future reference and reordering.",
+      },
+    ],
+    process: [
+      {
+        step: 1,
+        title: "Send Us the Part",
+        description:
+          "Bring or ship your original part — even if it's broken, worn, or incomplete.",
+      },
+      {
+        step: 2,
+        title: "3D Scanning",
+        description:
+          "We capture the part's geometry with high-precision scanning, reconstructing missing sections as needed.",
+      },
+      {
+        step: 3,
+        title: "CAD Rebuild",
+        description:
+          "Our team recreates the part in CAD, optionally improving strength, fit, or material selection.",
+      },
+      {
+        step: 4,
+        title: "Print & Deliver",
+        description:
+          "We print your replacement part and deliver it with the 3D file for future orders.",
+      },
+    ],
+    specs: [
+      { label: "Input", value: "Complete or broken parts" },
+      { label: "Scanning Accuracy", value: "Up to 0.05mm" },
+      { label: "CAD Software", value: "Fusion 360, SolidWorks" },
+      { label: "Output", value: "Physical part + 3D file" },
+      { label: "Materials", value: "PLA, PETG, ABS, TPU, Nylon" },
+      { label: "Turnaround", value: "3-10 business days" },
+    ],
+    faqs: [
+      {
+        question: "Can you work from a broken part?",
+        answer:
+          "Yes! We regularly reconstruct parts from damaged or incomplete originals. As long as we can understand the intended geometry, we can rebuild it.",
+      },
+      {
+        question: "Will the replacement be identical to the original?",
+        answer:
+          "We aim for functional equivalence. Dimensions and fit will match, but we may improve the design — such as reinforcing weak areas or using a more suitable material.",
+      },
+      {
+        question: "Do I get to keep the 3D file?",
+        answer:
+          "Absolutely. You own the file we create, so you can reorder parts anytime without starting the process over.",
+      },
+      {
+        question: "What if I don't have the original part at all?",
+        answer:
+          "If you have photos, drawings, or can describe the part and its mounting points, we may still be able to help. Contact us to discuss your situation.",
+      },
+    ],
+  },
   training: {
     slug: "training",
     title: "3D Printing Training",
