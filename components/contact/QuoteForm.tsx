@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, DragEvent } from "react";
+import { useState, useRef, useEffect, DragEvent } from "react";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB per file
 const MAX_TOTAL_SIZE = 25 * 1024 * 1024; // 25MB total
@@ -12,29 +12,47 @@ export default function QuoteForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
 
-  const validateFiles = (fileList: File[]): { valid: File[]; error: string | null } => {
-    const validFiles: File[] = [];
-    let totalSize = 0;
+  // Scroll to success message when submitted
+  useEffect(() => {
+    if (isSubmitted && successRef.current) {
+      successRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [isSubmitted]);
 
-    for (const file of fileList) {
+  const validateAndAddFiles = (
+    newFiles: File[],
+    existingFiles: File[]
+  ): { valid: File[]; error: string | null } => {
+    const combined: File[] = [...existingFiles];
+    let totalSize = existingFiles.reduce((sum, f) => sum + f.size, 0);
+
+    for (const file of newFiles) {
+      // Skip duplicates
+      if (combined.some((f) => f.name === file.name && f.size === file.size)) {
+        continue;
+      }
+
       if (file.size > MAX_FILE_SIZE) {
         return {
-          valid: [],
+          valid: existingFiles,
           error: `"${file.name}" exceeds 10MB limit. Please use Google Drive or Dropbox for larger files.`,
         };
       }
+
       totalSize += file.size;
       if (totalSize > MAX_TOTAL_SIZE) {
         return {
-          valid: [],
-          error: "Total file size exceeds 25MB. Please use Google Drive or Dropbox for larger files.",
+          valid: existingFiles,
+          error: "Total file size would exceed 25MB. Please use Google Drive or Dropbox for larger files.",
         };
       }
-      validFiles.push(file);
+
+      combined.push(file);
     }
 
-    return { valid: validFiles, error: null };
+    return { valid: combined, error: null };
   };
 
   const handleDragOver = (e: DragEvent) => {
@@ -50,7 +68,7 @@ export default function QuoteForm() {
     e.preventDefault();
     setIsDragging(false);
     const droppedFiles = Array.from(e.dataTransfer.files);
-    const { valid, error } = validateFiles(droppedFiles);
+    const { valid, error } = validateAndAddFiles(droppedFiles, files);
     setFileError(error);
     setFiles(valid);
   };
@@ -58,9 +76,11 @@ export default function QuoteForm() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const selectedFiles = Array.from(e.target.files);
-      const { valid, error } = validateFiles(selectedFiles);
+      const { valid, error } = validateAndAddFiles(selectedFiles, files);
       setFileError(error);
       setFiles(valid);
+      // Reset input so the same file can be selected again if removed
+      e.target.value = "";
     }
   };
 
@@ -112,17 +132,33 @@ export default function QuoteForm() {
 
   if (isSubmitted) {
     return (
-      <div className="text-center py-12">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#f0fdf4] flex items-center justify-center text-[2rem]">
+      <div
+        ref={successRef}
+        className="text-center py-16 px-8 bg-gradient-to-b from-[#f0fdf4] to-[#dcfce7] rounded-2xl border-2 border-[#86efac] shadow-lg"
+      >
+        <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[#22c55e] flex items-center justify-center text-white text-[2.5rem] shadow-[0_8px_30px_rgba(34,197,94,0.3)]">
           ✓
         </div>
-        <h3 className="font-serif text-[1.5rem] text-[#0f172a] mb-2">
-          Quote request received!
+        <h3 className="font-serif text-[2rem] text-[#166534] mb-3">
+          Quote Request Received!
         </h3>
-        <p className="text-[#64748b] text-[0.95rem]">
-          We&apos;ll get back to you within one business day — usually much
-          sooner.
+        <p className="text-[#15803d] text-[1.1rem] mb-6 max-w-md mx-auto">
+          Thank you for reaching out. We&apos;ll review your project and get back to you within one business day — usually much sooner.
         </p>
+        <div className="inline-flex items-center gap-2 px-5 py-3 bg-white rounded-full text-[0.9rem] text-[#166534] font-medium shadow-sm">
+          <span>📧</span>
+          <span>Check your inbox for a confirmation email</span>
+        </div>
+        <div className="mt-8 pt-6 border-t border-[#86efac]">
+          <p className="text-[0.85rem] text-[#15803d] mb-2">Need to add more details?</p>
+          <a
+            href="mailto:Connect@3dlabsokc.com"
+            className="inline-flex items-center gap-2 text-[#166534] font-semibold hover:underline"
+          >
+            Reply to your confirmation email or contact us directly
+            <span>→</span>
+          </a>
+        </div>
       </div>
     );
   }
