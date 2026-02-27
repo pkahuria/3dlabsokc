@@ -49,14 +49,18 @@ export default function QuoteForm() {
         body: formData,
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to submit");
+        console.error("Server error:", result);
+        throw new Error(result.message || "Failed to submit");
       }
 
       setIsSubmitted(true);
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("There was an error submitting your request. Please try again or call us directly.");
+      const message = error instanceof Error ? error.message : "Unknown error";
+      alert(`There was an error: ${message}. Please try again or call us directly at (405) 546-2228.`);
     } finally {
       setIsSubmitting(false);
     }
