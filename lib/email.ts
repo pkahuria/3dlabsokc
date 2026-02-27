@@ -14,6 +14,11 @@ function getResend(): Resend {
   return resend;
 }
 
+interface Attachment {
+  filename: string;
+  content: Buffer;
+}
+
 interface QuoteData {
   firstName: string;
   lastName: string;
@@ -22,7 +27,7 @@ interface QuoteData {
   service: string;
   material: string;
   details: string;
-  fileNames?: string[];
+  attachments?: Attachment[];
 }
 
 const serviceLabels: Record<string, string> = {
@@ -44,7 +49,8 @@ const materialLabels: Record<string, string> = {
 };
 
 export async function sendQuoteEmail(data: QuoteData) {
-  const { firstName, lastName, email, phone, service, material, details, fileNames } = data;
+  const { firstName, lastName, email, phone, service, material, details, attachments } = data;
+  const fileNames = attachments?.map((a) => a.filename);
 
   const htmlContent = `
 <!DOCTYPE html>
@@ -148,6 +154,10 @@ Reply directly to this email to respond to the customer.
     subject: `Quote Request: ${serviceLabels[service] || service} — ${firstName} ${lastName}`,
     html: htmlContent,
     text: textContent,
+    attachments: attachments?.map((a) => ({
+      filename: a.filename,
+      content: a.content,
+    })),
   });
 
   // Send confirmation to customer

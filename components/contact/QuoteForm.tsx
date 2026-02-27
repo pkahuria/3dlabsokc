@@ -2,12 +2,40 @@
 
 import { useState, useRef, DragEvent } from "react";
 
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB per file
+const MAX_TOTAL_SIZE = 25 * 1024 * 1024; // 25MB total
+
 export default function QuoteForm() {
   const [files, setFiles] = useState<File[]>([]);
+  const [fileError, setFileError] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const validateFiles = (fileList: File[]): { valid: File[]; error: string | null } => {
+    const validFiles: File[] = [];
+    let totalSize = 0;
+
+    for (const file of fileList) {
+      if (file.size > MAX_FILE_SIZE) {
+        return {
+          valid: [],
+          error: `"${file.name}" exceeds 10MB limit. Please use Google Drive or Dropbox for larger files.`,
+        };
+      }
+      totalSize += file.size;
+      if (totalSize > MAX_TOTAL_SIZE) {
+        return {
+          valid: [],
+          error: "Total file size exceeds 25MB. Please use Google Drive or Dropbox for larger files.",
+        };
+      }
+      validFiles.push(file);
+    }
+
+    return { valid: validFiles, error: null };
+  };
 
   const handleDragOver = (e: DragEvent) => {
     e.preventDefault();
@@ -22,13 +50,29 @@ export default function QuoteForm() {
     e.preventDefault();
     setIsDragging(false);
     const droppedFiles = Array.from(e.dataTransfer.files);
-    setFiles(droppedFiles);
+    const { valid, error } = validateFiles(droppedFiles);
+    setFileError(error);
+    setFiles(valid);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setFiles(Array.from(e.target.files));
+      const selectedFiles = Array.from(e.target.files);
+      const { valid, error } = validateFiles(selectedFiles);
+      setFileError(error);
+      setFiles(valid);
     }
+  };
+
+  const removeFile = (index: number) => {
+    setFiles(files.filter((_, i) => i !== index));
+    setFileError(null);
+  };
+
+  const formatFileSize = (bytes: number): string => {
+    if (bytes < 1024) return bytes + " B";
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+    return (bytes / (1024 * 1024)).toFixed(1) + " MB";
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -239,7 +283,7 @@ export default function QuoteForm() {
         {/* File Upload */}
         <div className="sm:col-span-2">
           <label className="block text-[0.82rem] font-semibold text-[#334155] mb-1.5">
-            Upload a File{" "}
+            Upload Files{" "}
             <span className="font-normal text-[#94a3b8]">(optional)</span>
           </label>
           <div
@@ -247,27 +291,20 @@ export default function QuoteForm() {
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            className={`border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-all duration-200 ${
+            className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all duration-200 ${
               isDragging
                 ? "border-[#fb923c] bg-[#fff7ed]"
+                : fileError
+                ? "border-[#ef4444] bg-[#fef2f2]"
                 : "border-[#e2e8f0] bg-[#f8fafc] hover:border-[#36a5ff] hover:bg-[#f0f7ff]"
             }`}
           >
             <div className="text-[2rem] mb-2">📎</div>
             <div className="text-[0.88rem] text-[#64748b]">
-              {files.length > 0 ? (
-                <strong className="text-[#0c8ce9]">
-                  {files.length} file{files.length > 1 ? "s" : ""} selected
-                </strong>
-              ) : (
-                <>
-                  <strong className="text-[#0c8ce9]">Click to upload</strong> or
-                  drag and drop
-                </>
-              )}
+              <strong className="text-[#0c8ce9]">Click to upload</strong> or drag and drop
             </div>
             <div className="text-[0.75rem] text-[#94a3b8] mt-1">
-              STL, OBJ, STEP, PDF, JPG, PNG — up to 25MB
+              STL, OBJ, STEP, PDF, JPG, PNG — max 10MB per file, 25MB total
             </div>
             <input
               ref={fileInputRef}
@@ -278,6 +315,54 @@ export default function QuoteForm() {
               onChange={handleFileChange}
             />
           </div>
+
+          {/* File Error */}
+          {fileError && (
+            <div className="mt-2 p-3 bg-[#fef2f2] border border-[#fecaca] rounded-lg text-[0.82rem] text-[#dc2626]">
+              {fileError}
+            </div>
+          )}
+
+          {/* Selected Files List */}
+          {files.length > 0 && (
+            <div className="mt-3 space-y-2">
+              {files.map((file, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between p-3 bg-[#f0f7ff] border border-[#e0f2fe] rounded-lg"
+                >
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="text-[#0c8ce9]">📄</span>
+                    <span className="text-[0.85rem] text-[#334155] truncate">
+                      {file.name}
+                    </span>
+                    <span className="text-[0.75rem] text-[#94a3b8] whitespace-nowrap">
+                      ({formatFileSize(file.size)})
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeFile(index);
+                    }}
+                    className="text-[#94a3b8] hover:text-[#ef4444] transition-colors p-1"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Large File Note */}
+          <p className="mt-3 text-[0.75rem] text-[#64748b]">
+            <strong>Have larger files?</strong> Email them directly to{" "}
+            <a href="mailto:Connect@3dlabsokc.com" className="text-[#f97316] hover:underline">
+              Connect@3dlabsokc.com
+            </a>{" "}
+            or share a Google Drive / Dropbox link in the project details above.
+          </p>
         </div>
       </div>
 

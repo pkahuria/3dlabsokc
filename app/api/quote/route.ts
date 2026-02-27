@@ -53,18 +53,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get file names (for now, just capture names - S3 upload can be added later)
+    // Process file attachments
     const files = formData.getAll("files") as File[];
-    const fileNames = files
-      .filter((file) => file.size > 0)
-      .map((file) => file.name);
+    const attachments: { filename: string; content: Buffer }[] = [];
 
-    console.log("Sending email...");
+    for (const file of files) {
+      if (file.size > 0) {
+        const arrayBuffer = await file.arrayBuffer();
+        attachments.push({
+          filename: file.name,
+          content: Buffer.from(arrayBuffer),
+        });
+      }
+    }
+
+    console.log(`Sending email with ${attachments.length} attachment(s)...`);
 
     // Send email notification
     const result = await sendQuoteEmail({
       ...data,
-      fileNames: fileNames.length > 0 ? fileNames : undefined,
+      attachments: attachments.length > 0 ? attachments : undefined,
     });
 
     if (result.error) {
