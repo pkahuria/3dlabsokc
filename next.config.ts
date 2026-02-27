@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
   images: {
     remotePatterns: [
       {
@@ -9,6 +8,9 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
+  },
+  env: {
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
   },
 };
 
