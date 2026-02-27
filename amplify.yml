@@ -6,6 +6,7 @@ frontend:
         - npm ci
     build:
       commands:
+        - echo "RESEND_API_KEY is set = $(if [ -n \"$RESEND_API_KEY\" ]; then echo 'YES'; else echo 'NO'; fi)"
         - npm run build
   artifacts:
     baseDirectory: .next
